@@ -1,28 +1,28 @@
-const _brand = Symbol('brand');
-const _motor = Symbol('motor');
-const _color = Symbol('color');
+const brand = Symbol('brand');
+const motor = Symbol('motor');
+const color = Symbol('color');
 
 export default class Car {
-  constructor(brand, motor, color) {
+  constructor(brandValue, motorValue, colorValue) {
     // Initialize attributes with symbols
-    this[_brand] = brand;
-    this[_motor] = motor;
-    this[_color] = color;
+    this[brand] = brandValue;
+    this[motor] = motorValue;
+    this[color] = colorValue;
   }
 
   // Getter for brand
   get brand() {
-    return this[_brand];
+    return this[brand];
   }
 
   // Getter for motor
   get motor() {
-    return this[_motor];
+    return this[motor];
   }
 
   // Getter for color
   get color() {
-    return this[_color];
+    return this[color];
   }
 
   // Method to clone the car instance
@@ -30,9 +30,9 @@ export default class Car {
     // Create a new instance of the same class with private attributes set to undefined
     const ClonedCar = Object.getPrototypeOf(this).constructor;
     const clone = new ClonedCar(undefined, undefined, undefined);
-    
+
     // Copy the symbols from the original instance to the clone
-    Object.getOwnPropertySymbols(this).forEach(symbol => {
+    Object.getOwnPropertySymbols(this).forEach((symbol) => {
       clone[symbol] = this[symbol];
     });
 
