@@ -1,10 +1,5 @@
-let expect;
-
-(async () => {
-  const chai = await import('chai');
-  expect = chai.expect;
-})();
-
+const chai = require('chai');
+const expect = chai.expect;
 const calculateNumber = require('./2-calcul_chai.js');
 
 describe('calculateNumber', () => {
