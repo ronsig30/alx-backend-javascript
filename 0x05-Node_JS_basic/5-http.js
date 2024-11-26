@@ -12,16 +12,12 @@ const countStudents = async (path) => {
     const headers = lines.shift().split(',');
     const students = lines.map((line) => {
       const values = line.split(',');
-      return headers.reduce((obj, header, idx) => {
-        obj[header] = values[idx];
-        return obj;
-      }, {});
+      return headers.reduce((obj, header, idx) => ({ ...obj, [header]: values[idx] }), {});
     });
 
-    const fields = students.reduce((acc, student) => {
-      const field = student.field;
+    const fields = students.reduce((acc, { firstname, field }) => {
       if (!acc[field]) acc[field] = [];
-      acc[field].push(student.firstname);
+      acc[field].push(firstname);
       return acc;
     }, {});
 
@@ -49,7 +45,7 @@ const app = http.createServer(async (req, res) => {
     res.setHeader('Content-Type', 'text/plain');
     res.write('This is the list of our students\n');
     try {
-      const dbPath = process.argv[2];
+      const [,, dbPath] = process.argv; // Destructure `process.argv` to extract the database path
       if (!dbPath) throw new Error('Database path not provided');
       const studentData = await countStudents(dbPath);
       res.end(studentData);
