@@ -13,7 +13,7 @@ const getStudentsData = (filePath) => {
   data.forEach((line, index) => {
     // Skip the header row
     if (index === 0) return;
-    
+
     const [firstname, lastname, age, field] = line.split(',');
 
     if (firstname && lastname && age && field) {
@@ -36,12 +36,12 @@ app.get('/students', (req, res) => {
   const students = getStudentsData(process.argv[2]);
 
   const numOfStudents = students.length;
-  const csStudents = students.filter(student => student.field === 'CS');
-  const sweStudents = students.filter(student => student.field === 'SWE');
+  const csStudents = students.filter((student) => student.field === 'CS');
+  const sweStudents = students.filter((student) => student.field === 'SWE');
 
   // Create the lists for CS and SWE students
-  const csNames = csStudents.map(student => student.name).join(', ');
-  const sweNames = sweStudents.map(student => student.name).join(', ');
+  const csNames = csStudents.map((student) => student.name).join(', ');
+  const sweNames = sweStudents.map((student) => student.name).join(', ');
 
   // Format the output according to the requirements
   res.send(`This is the list of our students\nNumber of students: ${numOfStudents}\nNumber of students in CS: ${csStudents.length}. List: ${csNames}\nNumber of students in SWE: ${sweStudents.length}. List: ${sweNames}`);
