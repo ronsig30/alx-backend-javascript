@@ -9,6 +9,7 @@ const Utils = {
     if (type === 'DIVIDE') {
       return a / b;
     }
+    return 0;
   },
 };
 
