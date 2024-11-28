@@ -1,19 +1,37 @@
-const assert = require('assert');
-const calculateNumber = require('./0-calcul');
+/* eslint-disable jest/expect-expect */
+/* eslint-disable jest/prefer-expect-assertions */
+/* eslint-disable import/extensions */
+import { strict as assert } from 'assert';
+import { calculateNumber } from './0-calcul.js';
 
 describe('calculateNumber', () => {
-  it('should return the sum of two rounded numbers', () => {
-    assert.strictEqual(calculateNumber(1.4, 3.4), 4);
-    assert.strictEqual(calculateNumber(1.5, 3.7), 6);
+  it('should return 4 when inputs are 1 and 3', () => {
+    const result = calculateNumber(1, 3);
+    assert.strictEqual(result, 4);
   });
 
-  it('should round numbers correctly and handle edge cases', () => {
-    assert.strictEqual(calculateNumber(-1.5, -3.5), -4); // Corrected expectation
-    assert.strictEqual(calculateNumber(-1.4, -3.4), -4);
+  it('should return 5 when inputs are 1 and 3.7', () => {
+    const result = calculateNumber(1, 3.7);
+    assert.strictEqual(result, 5);
   });
 
-  it('should work with zeros', () => {
-    assert.strictEqual(calculateNumber(0, 0), 0);
-    assert.strictEqual(calculateNumber(0.5, 0.5), 2);
+  it('should return 5 when inputs are 1.2 and 3.7', () => {
+    const result = calculateNumber(1.2, 3.7);
+    assert.strictEqual(result, 5);
+  });
+
+  it('should return 6 when inputs are 1.5 and 3.7', () => {
+    const result = calculateNumber(1.5, 3.7);
+    assert.strictEqual(result, 6);
+  });
+
+  it('should return 0 when inputs are -0.4 and 0.4', () => {
+    const result = calculateNumber(-0.4, 0.4);
+    assert.strictEqual(result, 0);
+  });
+
+  it('should handle negative numbers correctly', () => {
+    const result = calculateNumber(-1.6, -3.2);
+    assert.strictEqual(result, -5);
   });
 });
