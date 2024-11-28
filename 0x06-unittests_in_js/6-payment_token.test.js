@@ -1,31 +1,19 @@
-// 6-payment_token.test.js
+const { expect } = require('chai');
+const getPaymentTokenFromAPI = require('./6-payment_token');
 
-const { getPaymentTokenFromAPI } = require('./6-payment_token');
-
-describe('getPaymentTokenFromAPI', function () {
-  it('should return a successful response when success is true', function (done) {
-    getPaymentTokenFromAPI(true)
-      .then(response => {
-        // Assert that the correct data is returned
-        if (response.data !== 'Successful response from the API') {
-          done(new Error('Expected response data to match'));
-        } else {
-          done();
-        }
-      })
-      .catch(done); // In case there's an unexpected error
+describe('getPaymentTokenFromAPI', () => {
+  it('should return a resolved promise with correct data when success is true', (done) => {
+    getPaymentTokenFromAPI(true).then((response) => {
+      expect(response).to.deep.equal({ data: 'Successful response from the API' });
+      done(); // Ensure test completes only after the promise resolves
+    }).catch((error) => {
+      done(error); // Handle unexpected errors in the promise
+    });
   });
 
-  it('should return nothing when success is false', function (done) {
-    getPaymentTokenFromAPI(false)
-      .then(response => {
-        // Assert that response is undefined (nothing is returned)
-        if (response !== undefined) {
-          done(new Error('Expected no response'));
-        } else {
-          done();
-        }
-      })
-      .catch(done); // In case there's an unexpected error
+  it('should do nothing when success is false', (done) => {
+    const result = getPaymentTokenFromAPI(false);
+    expect(result).to.be.undefined; // No promise should be returned
+    done();
   });
 });
