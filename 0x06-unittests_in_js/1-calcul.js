@@ -2,13 +2,11 @@ function calculateNumber(type, a, b) {
   const roundedA = Math.round(a);
   const roundedB = Math.round(b);
 
-  const operation = type.toUpperCase(); // Ensure case insensitivity
-
-  if (operation === 'SUM') {
+  if (type === 'SUM') {
     return roundedA + roundedB;
-  } if (operation === 'SUBTRACT') {
+  } if (type === 'SUBTRACT') {
     return roundedA - roundedB;
-  } if (operation === 'DIVIDE') {
+  } if (type === 'DIVIDE') {
     if (roundedB === 0) {
       return 'Error';
     }
